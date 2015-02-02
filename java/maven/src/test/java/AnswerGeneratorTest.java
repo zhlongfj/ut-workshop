@@ -24,13 +24,18 @@ public class AnswerGeneratorTest {
     @Test
     public void generate_a_random_digit_without_repeat_test_is_a_digit_string(){
         //given
-        int number = 0;
+        boolean isDigitExpect = true;
 
         //when
         AnswerGenerator answerGenerator = new AnswerGenerator();
         String digit = answerGenerator.generateARandomDigitWithoutRepeat();
+        boolean isDigit = isDigit(digit);
 
         //then
+        assertThat(isDigit).isEqualTo(isDigitExpect);
+    }
+
+    private boolean isDigit(String digit) {
         boolean isDigit = true;
         for (int i = 0; i < digit.length(); i++) {
             if (!Character.isDigit(digit.charAt(i))) {
@@ -38,8 +43,35 @@ public class AnswerGeneratorTest {
                 break;
             }
         }
+        return isDigit;
+    }
 
-        assertThat(isDigit).isEqualTo(true);
+    @Test
+    public void generate_a_random_digit_without_repeat_test_is_a_string_without_repeat(){
+        //given
+        boolean isRepeatExpect = false;
+
+        //when
+        AnswerGenerator answerGenerator = new AnswerGenerator();
+        String digit = answerGenerator.generateARandomDigitWithoutRepeat();
+        boolean isRepeat = isRepeat(digit);
+
+        //then
+        assertThat(isRepeat).isEqualTo(isRepeatExpect);
+    }
+
+    private boolean isRepeat(String digit) {
+        boolean isRepeat = false;
+        String tmp = "";
+        for (int i = 0; i < digit.length(); i++) {
+            if (tmp.contains(String.valueOf(digit.charAt(i)))) {
+                isRepeat = true;
+                break;
+            }
+
+            tmp += digit.charAt(i);
+        }
+        return isRepeat;
     }
 
 }
