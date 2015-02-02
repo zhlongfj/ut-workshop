@@ -8,14 +8,20 @@ import java.util.Random;
 public class AnswerGenerator {
     public String generateARandomDigitWithoutRepeat() {
         StringBuffer randomDigit = new StringBuffer();
-        String str = "0123456789";
-        Random r = new Random();
+        String sampling = "0123456789";
         for (int i = 0; i < 4; i++) {
-            int num = r.nextInt(str.length());
-            randomDigit.append(str.charAt(num));
-            str = str.replace((str.charAt(num)+""), "");
+            String digit = getDigitStringFromSampling(sampling);
+            randomDigit.append(digit);
+            sampling = sampling.replace((digit), "");
         }
 
         return randomDigit.toString();
+    }
+
+    private  String getDigitStringFromSampling(String sampling) {
+        Random r = new Random();
+        int num = r.nextInt(sampling.length());
+        String digit = String.valueOf(sampling.charAt(num));
+        return digit;
     }
 }
