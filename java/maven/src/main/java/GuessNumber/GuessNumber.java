@@ -10,9 +10,10 @@ public class GuessNumber {
         for (int i = 0; i < answer.length(); i++) {
             if (input.contains(String.valueOf(answer.charAt(i)))) {
                 countsOfCotain++;
-                if (input.charAt(i) == answer.charAt(i)) {
-                    countsOfEuqal++;
-                }
+            }
+
+            if (input.charAt(i) == answer.charAt(i)) {
+                countsOfEuqal++;
             }
         }
 
