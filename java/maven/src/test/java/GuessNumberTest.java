@@ -51,4 +51,19 @@ public class GuessNumberTest {
         //then
         assertThat(tips).isEqualTo(tipsExpect);
     }
+
+    @Test
+    public void get_tips_test_return_0A4B_when_input_is_1234_and_answer_is_1324(){
+        //given
+        String input = "1234";
+        String answer = "1324";
+        String tipsExpect = "2A2B";
+
+        //when
+        GuessNumber guessNumber = new GuessNumber();
+        String tips = guessNumber.getTips(input, answer);
+
+        //then
+        assertThat(tips).isEqualTo(tipsExpect);
+    }
 }
