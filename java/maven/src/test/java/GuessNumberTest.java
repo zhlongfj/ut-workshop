@@ -53,7 +53,7 @@ public class GuessNumberTest {
     }
 
     @Test
-    public void get_tips_test_return_0A4B_when_input_is_1234_and_answer_is_1324(){
+    public void get_tips_test_return_2A2B_when_input_is_1234_and_answer_is_1324(){
         //given
         String input = "1234";
         String answer = "1324";

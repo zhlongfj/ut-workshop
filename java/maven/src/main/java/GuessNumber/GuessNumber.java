@@ -5,22 +5,23 @@ package GuessNumber;
  */
 public class GuessNumber {
     public String getTips(String input, String answer) {
-        int containCounts = 0;
-        int equalCounts = 0;
-        if (input.equals(answer)) {
-            return "4A0B";
-        } else {
-            for (int i = 0; i < answer.length(); i++) {
-                if (input.contains(String.valueOf(answer.charAt(i)))) {
-                    containCounts ++;
-                    if (input.charAt(i) == answer.charAt(i)) {
-                        equalCounts ++;
-                    }
+        int countsOfCotain = 0;
+        int countsOfEuqal = 0;
+        for (int i = 0; i < answer.length(); i++) {
+            if (input.contains(String.valueOf(answer.charAt(i)))) {
+                countsOfCotain++;
+                if (input.charAt(i) == answer.charAt(i)) {
+                    countsOfEuqal++;
                 }
             }
-
-            String tips = equalCounts + "A" + (containCounts = equalCounts) + "B";
-            return tips;
         }
+
+        return getTipsFromCountsOfContainAndCountsOfEuqal(countsOfCotain, countsOfEuqal);
+    }
+
+    private String getTipsFromCountsOfContainAndCountsOfEuqal(int countsOfContain, int countsOfEqual) {
+        int countsOfContainWithoutEqual = countsOfContain - countsOfEqual;
+        String tips = countsOfEqual + "A" + countsOfContainWithoutEqual + "B";
+        return tips;
     }
 }
