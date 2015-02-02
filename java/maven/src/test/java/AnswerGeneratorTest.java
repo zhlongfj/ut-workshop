@@ -12,7 +12,18 @@ import static org.fest.assertions.api.Assertions.assertThat;
  */
 public class AnswerGeneratorTest {
 
+    @Test
+    public void generate_a_random_digit_that_generate_different_string_at_every_time(){
+        //given
+        AnswerGenerator answerGenerator = new AnswerGenerator();
 
+        //when
+        String digit1 = answerGenerator.generateARandomDigitWithoutRepeat();
+        String digit2 = answerGenerator.generateARandomDigitWithoutRepeat();
+
+        //then
+        assertThat(digit1).isNotEqualTo(digit2);
+    }
 
     @Test
     public void generate_a_random_digit_without_repeat_test_lenght_is_4(){
