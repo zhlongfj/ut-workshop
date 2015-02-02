@@ -1,6 +1,10 @@
 import GuessNumber.AnswerGenerator;
 import org.junit.Test;
 
+import java.util.HashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.fest.assertions.api.Assertions.assertThat;
 
 /**
@@ -8,13 +12,14 @@ import static org.fest.assertions.api.Assertions.assertThat;
  */
 public class AnswerGeneratorTest {
 
+
+
     @Test
     public void generate_a_random_digit_without_repeat_test_lenght_is_4(){
         //given
-        int expect = 4;
+        AnswerGenerator answerGenerator = new AnswerGenerator();
 
         //when
-        AnswerGenerator answerGenerator = new AnswerGenerator();
         String digit = answerGenerator.generateARandomDigitWithoutRepeat();
 
         //then
@@ -24,53 +29,42 @@ public class AnswerGeneratorTest {
     @Test
     public void generate_a_random_digit_without_repeat_test_is_a_digit_string(){
         //given
-        boolean isDigitExpect = true;
+        AnswerGenerator answerGenerator = new AnswerGenerator();
 
         //when
-        AnswerGenerator answerGenerator = new AnswerGenerator();
         String digit = answerGenerator.generateARandomDigitWithoutRepeat();
         boolean isDigit = isDigit(digit);
 
         //then
-        assertThat(isDigit).isEqualTo(isDigitExpect);
+        assertThat(isDigit).isEqualTo(true);
     }
 
     private boolean isDigit(String digit) {
-        boolean isDigit = true;
-        for (int i = 0; i < digit.length(); i++) {
-            if (!Character.isDigit(digit.charAt(i))) {
-                isDigit = false;
-                break;
-            }
-        }
-        return isDigit;
+        Pattern pattern = Pattern.compile("[0-9]*");
+        Matcher isDigit = pattern.matcher(digit);
+        return isDigit.matches();
     }
 
     @Test
     public void generate_a_random_digit_without_repeat_test_is_a_string_without_repeat(){
         //given
-        boolean isRepeatExpect = false;
+        AnswerGenerator answerGenerator = new AnswerGenerator();
 
         //when
-        AnswerGenerator answerGenerator = new AnswerGenerator();
         String digit = answerGenerator.generateARandomDigitWithoutRepeat();
         boolean isRepeat = isRepeat(digit);
 
         //then
-        assertThat(isRepeat).isEqualTo(isRepeatExpect);
+        assertThat(isRepeat).isEqualTo(false);
     }
 
     private boolean isRepeat(String digit) {
-        boolean isRepeat = false;
-        String tmp = "";
+        HashSet<Character> number = new HashSet<Character>();
         for (int i = 0; i < digit.length(); i++) {
-            if (tmp.contains(String.valueOf(digit.charAt(i)))) {
-                isRepeat = true;
-                break;
-            }
-
-            tmp += digit.charAt(i);
+            number.add(digit.charAt(i));
         }
+        int n = number.size();
+        boolean isRepeat = (number.size() < digit.length()) ? true : false;
         return isRepeat;
     }
 
