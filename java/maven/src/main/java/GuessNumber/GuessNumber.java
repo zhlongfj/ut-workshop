@@ -5,8 +5,7 @@ package GuessNumber;
  */
 public class GuessNumber {
     public String getTips(String input, String answer) {
-        String tips = getCountsOfEqual(input, answer) + "A" + countsOfContainWithoutEqual(input, answer) + "B";
-        return tips;
+        return getCountsOfEqual(input, answer) + "A" + countsOfContainWithoutEqual(input, answer) + "B";
     }
 
     private int countsOfContainWithoutEqual(String input, String answer) {
