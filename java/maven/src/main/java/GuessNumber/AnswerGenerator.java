@@ -6,16 +6,28 @@ import java.util.Random;
  * Created by zhl on 15/2/2.
  */
 public class AnswerGenerator {
+    private final String sampling = "0123456789";
     public String generateARandomDigitWithoutRepeat() {
-        StringBuffer randomDigit = new StringBuffer();
-        String sampling = "0123456789";
-        for (int i = 0; i < 4; i++) {
-            String digit = getDigitStringFromSampling(sampling);
-            randomDigit.append(digit);
-            sampling = sampling.replace((digit), "");
-        }
+        return getDigitFromSamplingWithoutChecked(samplingWithoutChecked());
+    }
 
-        return randomDigit.toString();
+    private String samplingWithoutChecked() {
+        String samplingWithoutChecked = sampling;
+        for (int i = 0; i < 4; i++) {
+            String checked = getDigitStringFromSampling(samplingWithoutChecked);
+            samplingWithoutChecked = samplingWithoutChecked.replace(checked, "");
+        }
+        return samplingWithoutChecked;
+    }
+
+    private String getDigitFromSamplingWithoutChecked(String samplingWithoutChecked) {
+        String digit = new String();
+        for (int i = 0; i < sampling.length(); i++) {
+            if (samplingWithoutChecked.contains(String.valueOf(sampling.charAt(i)))) {
+                digit += sampling.charAt(i);
+            }
+        }
+        return digit;
     }
 
     private  String getDigitStringFromSampling(String sampling) {
