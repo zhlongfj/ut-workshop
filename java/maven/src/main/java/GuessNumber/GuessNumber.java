@@ -5,7 +5,9 @@ package GuessNumber;
  */
 public class GuessNumber {
     public String getTips(String input, String answer) {
-        return getTipsFromCountsOfContainAndCountsOfEuqal(getCountsOfContain(input, answer), getCountsOfEqual(input, answer));
+        int countsOfContainWithoutEqual = getCountsOfContain(input, answer) - getCountsOfEqual(input, answer);
+        String tips = getCountsOfEqual(input, answer) + "A" + countsOfContainWithoutEqual + "B";
+        return tips;
     }
 
     private int getCountsOfContain(String input, String answer) {
@@ -26,11 +28,5 @@ public class GuessNumber {
             }
         }
         return countsOfEuqal;
-    }
-
-    private String getTipsFromCountsOfContainAndCountsOfEuqal(int countsOfContain, int countsOfEqual) {
-        int countsOfContainWithoutEqual = countsOfContain - countsOfEqual;
-        String tips = countsOfEqual + "A" + countsOfContainWithoutEqual + "B";
-        return tips;
     }
 }
