@@ -5,28 +5,31 @@ package GuessNumber;
  */
 public class GuessNumber {
     public String getTips(String input, String answer) {
-        int countsOfContainWithoutEqual = getCountsOfContain(input, answer) - getCountsOfEqual(input, answer);
-        String tips = getCountsOfEqual(input, answer) + "A" + countsOfContainWithoutEqual + "B";
+        String tips = getCountsOfEqual(input, answer) + "A" + countsOfContainWithoutEqual(input, answer) + "B";
         return tips;
     }
 
+    private int countsOfContainWithoutEqual(String input, String answer) {
+        return getCountsOfContain(input, answer) - getCountsOfEqual(input, answer);
+    }
+
     private int getCountsOfContain(String input, String answer) {
-        int countsOfCotain = 0;
+        int countsOfContain = 0;
         for (int i = 0; i < answer.length(); i++) {
             if (input.contains(String.valueOf(answer.charAt(i)))) {
-                countsOfCotain++;
+                countsOfContain++;
             }
         }
-        return countsOfCotain;
+        return countsOfContain;
     }
 
     private int getCountsOfEqual(String input, String answer) {
-        int countsOfEuqal = 0;
+        int countsOfEqual = 0;
         for (int i = 0; i < answer.length(); i++) {
             if (input.charAt(i) == answer.charAt(i)) {
-                countsOfEuqal++;
+                countsOfEqual++;
             }
         }
-        return countsOfEuqal;
+        return countsOfEqual;
     }
 }
