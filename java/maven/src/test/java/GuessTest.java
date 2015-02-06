@@ -62,7 +62,7 @@ public class GuessTest {
         Guess guess = new Guess();
         String result = guess.guessNumber(input, answerGenerator);
 
-        assertThat(result).isEqualTo("Please input 4 digits String!");
+        assertThat(result).isEqualTo("Must input 4 digits String!");
     }
 
     @Test
@@ -73,6 +73,20 @@ public class GuessTest {
         Guess guess = new Guess();
         String result = guess.guessNumber(input, answerGenerator);
 
-        assertThat(result).isEqualTo("Please input 4 digits String!");
+        assertThat(result).isEqualTo("Must input 4 digits String!");
+    }
+
+    @Test
+    public void should_return_game_over_when_input_error_in_6_times() {
+        String input = "1235";
+        AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
+        when(answerGenerator.generate()).thenReturn("1234");
+        Guess guess = new Guess();
+        String result = null;
+        for (int i = 0; i < 6; i++) {
+            result = guess.guessNumber(input, answerGenerator);
+        }
+
+        assertThat(result).isEqualTo("Game Over");
     }
 }
