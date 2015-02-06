@@ -8,6 +8,12 @@ public class Guess {
             return "Please input 4 digits String!";
         }
 
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return "Please input 4 digits String!";
+        }
+
         for (int i = 0; i < input.length(); i++) {
             if (input.indexOf(input.charAt(i)) != input.lastIndexOf(input.charAt(i))) {
                 return "Cannot input duplicate numbers!";
