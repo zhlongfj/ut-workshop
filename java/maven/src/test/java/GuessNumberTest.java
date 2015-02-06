@@ -1,4 +1,3 @@
-import GuessNumber.GuessNumber;
 import org.junit.Test;
 
 import static org.fest.assertions.api.Assertions.assertThat;

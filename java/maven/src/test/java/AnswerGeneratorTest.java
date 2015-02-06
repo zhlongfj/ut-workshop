@@ -1,4 +1,3 @@
-import GuessNumber.AnswerGenerator;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -74,3 +73,4 @@ public class AnswerGeneratorTest {
     }
 
 }
+

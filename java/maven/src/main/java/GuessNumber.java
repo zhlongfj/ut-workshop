@@ -1,5 +1,3 @@
-package GuessNumber;
-
 /**
  * Created by zhl on 15/2/2.
  */
