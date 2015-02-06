@@ -12,8 +12,8 @@ public class GuessTest {
         String input = "1234";
         AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
         when(answerGenerator.generate()).thenReturn("4321");
+        Guess guess = new Guess(answerGenerator, new GuessNumber());
 
-        Guess guess = new Guess(answerGenerator);
         String result = guess.guessNumber(input);
 
         assertThat(result).isEqualTo("0A4B");
@@ -24,8 +24,8 @@ public class GuessTest {
         String input = "1234";
         AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
         when(answerGenerator.generate()).thenReturn("1234");
+        Guess guess = new Guess(answerGenerator, new GuessNumber());
 
-        Guess guess = new Guess(answerGenerator);
         String result = guess.guessNumber(input);
 
         assertThat(result).isEqualTo("Congratulations!");
@@ -36,8 +36,8 @@ public class GuessTest {
         String input = "1223";
         AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
         when(answerGenerator.generate()).thenReturn("1234");
+        Guess guess = new Guess(answerGenerator, new GuessNumber());
 
-        Guess guess = new Guess(answerGenerator);
         String result = guess.guessNumber(input);
 
         assertThat(result).isEqualTo("Cannot input duplicate numbers!");
@@ -48,11 +48,11 @@ public class GuessTest {
         String input = "12345";
         AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
         when(answerGenerator.generate()).thenReturn("1234");
+        Guess guess = new Guess(answerGenerator, new GuessNumber());
 
-        Guess guess = new Guess(answerGenerator);
         String result = guess.guessNumber(input);
 
-        assertThat(result).isEqualTo("Please input 4 digits String!");
+        assertThat(result).isEqualTo("Must input 4 digits String!");
     }
 
     @Test
@@ -60,8 +60,8 @@ public class GuessTest {
         String input = "123";
         AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
         when(answerGenerator.generate()).thenReturn("1234");
+        Guess guess = new Guess(answerGenerator, new GuessNumber());
 
-        Guess guess = new Guess(answerGenerator);
         String result = guess.guessNumber(input);
 
         assertThat(result).isEqualTo("Must input 4 digits String!");
@@ -72,8 +72,8 @@ public class GuessTest {
         String input = "123b";
         AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
         when(answerGenerator.generate()).thenReturn("1234");
+        Guess guess = new Guess(answerGenerator, new GuessNumber());
 
-        Guess guess = new Guess(answerGenerator);
         String result = guess.guessNumber(input);
 
         assertThat(result).isEqualTo("Must input 4 digits String!");
@@ -84,8 +84,8 @@ public class GuessTest {
         String input = "1235";
         AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
         when(answerGenerator.generate()).thenReturn("1234");
+        Guess guess = new Guess(answerGenerator, new GuessNumber());
 
-        Guess guess = new Guess(answerGenerator);
         String result = null;
         for (int i = 0; i < 6; i++) {
             result = guess.guessNumber(input);
@@ -99,8 +99,8 @@ public class GuessTest {
         String input = "1356";
         AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
         when(answerGenerator.generate()).thenReturn("1234", "1357");
+        Guess guess = new Guess(answerGenerator, new GuessNumber());
 
-        Guess guess = new Guess(answerGenerator);
         String result = guess.guessNumber(input);
         assertThat(result).isEqualTo("1A1B");
         assertThat(result).isEqualTo("1A1B");
@@ -111,8 +111,8 @@ public class GuessTest {
         String input = "1235";
         AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
         when(answerGenerator.generate()).thenReturn("1234");
+        Guess guess = new Guess(answerGenerator, new GuessNumber());
 
-        Guess guess = new Guess(answerGenerator);
         for (int i = 0; i < 6; i++) {
             guess.guessNumber(input);
         }
