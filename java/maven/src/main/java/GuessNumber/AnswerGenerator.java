@@ -1,39 +1,47 @@
 package GuessNumber;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
  * Created by zhl on 15/2/2.
  */
 public class AnswerGenerator {
-    private final String sampling = "0123456789";
-    public String generateARandomDigitWithoutRepeat() {
-        return getDigitFromSamplingWithoutChecked(samplingWithoutChecked());
+    private Random random;
+    private List<String> historyGeneratedStrings;
+    public AnswerGenerator(Random random) {
+        this.random = random;
+        historyGeneratedStrings = new ArrayList<String>();
     }
 
-    private String samplingWithoutChecked() {
-        String samplingWithoutChecked = sampling;
-        for (int i = 0; i < 4; i++) {
-            String checked = getDigitStringFromSampling(samplingWithoutChecked);
-            samplingWithoutChecked = samplingWithoutChecked.replace(checked, "");
+    public String generate() {
+        String result = generateOnce();
+        while (historyGeneratedStrings.contains(result)) {
+            result = generateOnce();
         }
-        return samplingWithoutChecked;
+
+        if (historyGeneratedStrings.size() == 2) {
+            historyGeneratedStrings.remove(0);
+        }
+
+        historyGeneratedStrings.add(result);
+
+        return result;
     }
 
-    private String getDigitFromSamplingWithoutChecked(String samplingWithoutChecked) {
-        String digit = new String();
-        for (int i = 0; i < sampling.length(); i++) {
-            if (samplingWithoutChecked.contains(String.valueOf(sampling.charAt(i)))) {
-                digit += sampling.charAt(i);
+    public String generateOnce() {
+        StringBuffer result = new StringBuffer();
+
+        while (result.length() < 4) {
+            String digit = String.valueOf(random.nextInt(10));
+            if (result.indexOf(digit) == -1) {
+                result.append(digit);
             }
         }
-        return digit;
+
+        return result.toString();
     }
 
-    private  String getDigitStringFromSampling(String sampling) {
-        Random r = new Random();
-        int num = r.nextInt(sampling.length());
-        String digit = String.valueOf(sampling.charAt(num));
-        return digit;
-    }
 }
+

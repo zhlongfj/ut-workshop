@@ -12,14 +12,13 @@ public class GuessNumberTest {
         //given
         String input = "1234";
         String answer = "1234";
-        String tipsExpect = "4A0B";
 
         //when
         GuessNumber guessNumber = new GuessNumber();
         String tips = guessNumber.getTips(input, answer);
 
         //then
-        assertThat(tips).isEqualTo(tipsExpect);
+        assertThat(tips).isEqualTo("4A0B");
     }
 
     @Test
@@ -27,14 +26,13 @@ public class GuessNumberTest {
         //given
         String input = "1234";
         String answer = "4321";
-        String tipsExpect = "0A4B";
 
         //when
         GuessNumber guessNumber = new GuessNumber();
         String tips = guessNumber.getTips(input, answer);
 
         //then
-        assertThat(tips).isEqualTo(tipsExpect);
+        assertThat(tips).isEqualTo("0A4B");
     }
 
     @Test
@@ -42,14 +40,13 @@ public class GuessNumberTest {
         //given
         String input = "1234";
         String answer = "5678";
-        String tipsExpect = "0A0B";
 
         //when
         GuessNumber guessNumber = new GuessNumber();
         String tips = guessNumber.getTips(input, answer);
 
         //then
-        assertThat(tips).isEqualTo(tipsExpect);
+        assertThat(tips).isEqualTo("0A0B");
     }
 
     @Test
@@ -57,13 +54,12 @@ public class GuessNumberTest {
         //given
         String input = "1234";
         String answer = "1324";
-        String tipsExpect = "2A2B";
 
         //when
         GuessNumber guessNumber = new GuessNumber();
         String tips = guessNumber.getTips(input, answer);
 
         //then
-        assertThat(tips).isEqualTo(tipsExpect);
+        assertThat(tips).isEqualTo("2A2B");
     }
 }
