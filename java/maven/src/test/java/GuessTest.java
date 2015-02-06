@@ -21,7 +21,7 @@ public class GuessTest {
     }
 
     @Test
-    public void should_return_when_input_is_1234_mock_answer_is_1234() {
+    public void should_return_congratulations_when_input_is_1234_mock_answer_is_1234() {
         String input = "1234";
 
         AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
@@ -30,5 +30,49 @@ public class GuessTest {
         String result = guess.guessNumber(input, answerGenerator);
 
         assertThat(result).isEqualTo("Congratulations!");
+    }
+
+    @Test
+    public void should_return_error_info_when_input_is_1223_mock_answer_is_1234() {
+        String input = "1223";
+        AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
+        when(answerGenerator.generate()).thenReturn("1234");
+        Guess guess = new Guess();
+        String result = guess.guessNumber(input, answerGenerator);
+
+        assertThat(result).isEqualTo("Cannot input duplicate numbers!");
+    }
+
+    @Test
+    public void should_return_error_info_when_input_is_12345_mock_answer_is_1234() {
+        String input = "12345";
+        AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
+        when(answerGenerator.generate()).thenReturn("1234");
+        Guess guess = new Guess();
+        String result = guess.guessNumber(input, answerGenerator);
+
+        assertThat(result).isEqualTo("Please input 4 digits String!");
+    }
+
+    @Test
+    public void should_return_error_info_when_input_is_123_mock_answer_is_1234() {
+        String input = "123";
+        AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
+        when(answerGenerator.generate()).thenReturn("1234");
+        Guess guess = new Guess();
+        String result = guess.guessNumber(input, answerGenerator);
+
+        assertThat(result).isEqualTo("Please input 4 digits String!");
+    }
+
+    @Test
+    public void should_return_error_info_when_input_is_123b_mock_answer_is_1234() {
+        String input = "123b";
+        AnswerGenerator answerGenerator = mock(AnswerGenerator.class);
+        when(answerGenerator.generate()).thenReturn("1234");
+        Guess guess = new Guess();
+        String result = guess.guessNumber(input, answerGenerator);
+
+        assertThat(result).isEqualTo("Please input 4 digits String!");
     }
 }

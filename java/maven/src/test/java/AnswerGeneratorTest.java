@@ -50,7 +50,7 @@ public class AnswerGeneratorTest {
 
         //then
         for (int i = 0; i < result.length(); i++) {
-            assertThat(result.indexOf(i)).isEqualTo(result.lastIndexOf(i));
+            assertThat(result.indexOf(result.charAt(i))).isEqualTo(result.lastIndexOf(result.charAt(i)));
         }
     }
 
