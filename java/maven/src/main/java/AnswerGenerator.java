@@ -24,7 +24,6 @@ public class AnswerGenerator {
         }
 
         historyGeneratedStrings.add(result);
-
         return result;
     }
 
