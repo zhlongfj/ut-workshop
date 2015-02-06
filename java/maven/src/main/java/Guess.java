@@ -9,18 +9,8 @@ public class Guess {
     private String answer;
     private GuessNumber guessNumber;
     public static void main(String[] args) {
-
         Guess guess = new Guess(new AnswerGenerator(new Random()), new GuessNumber());
-        System.out.print("Welcome!\n");
-        String result = null;
-        while (result != "Game Over"&&  result != "Congratulations!" && guess.getTimes() > 0) {
-
-            String tips = String.format("\nPlease input your number(%d):", guess.getTimes());
-            System.out.print(tips);
-            Scanner sc = new Scanner( System.in );
-            result = guess.guessNumber(sc.next());
-            System.out.print(result);
-        }
+        guess.play(new Scanner(System.in));
     }
 
     public Guess(AnswerGenerator answerGenerator, GuessNumber guessNumber) {
@@ -28,6 +18,17 @@ public class Guess {
         this.guessNumber = guessNumber;
 
         System.out.print(answer);
+    }
+
+    public String play(Scanner scanner) {
+        System.out.print("Welcome!\n");
+
+        while (true) {
+            String result = playOnce(scanner);
+            if (result.equals("Congratulations!")  || result.equals("Game Over")) {
+                return result;
+            }
+        }
     }
 
     public String guessNumber(String input) {
@@ -48,6 +49,13 @@ public class Guess {
         } else {
             return guessNumber.getTips(input, answer);
         }
+    }
+
+    private String playOnce(Scanner scanner) {
+        System.out.print(String.format("\nPlease input your number(%d):", getTimes()));
+        String result = guessNumber(scanner.next());
+        System.out.print(result);
+        return result;
     }
 
     private boolean isLegal(String input) {
@@ -91,7 +99,8 @@ public class Guess {
 
         return false;
     }
-    public int getTimes() {
+
+    private int getTimes() {
         return times;
     }
 }
