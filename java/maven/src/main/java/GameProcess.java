@@ -27,13 +27,13 @@ public class GameProcess {
             out.println("Please input your number(" + roundCount + "): ");
             String answer = answerGenerator.generate();
             String input = read.readLine();
-            if (!isDuplicated(input)) {
-                out.println("Cannot input duplicate numbers!");
+            if (input.length() != 4 || !isDigitString(input)) {
+                out.println("Must input 4 digits String!");
                 continue;
             }
 
-            if (input.length() != 4) {
-                out.println("Must input 4 digits String!");
+            if (isDuplicated(input)) {
+                out.println("Cannot input duplicate numbers!");
                 continue;
             }
 
@@ -58,8 +58,17 @@ public class GameProcess {
     private boolean isDuplicated(String input) {
         for (int i = 0; i < input.length(); i++) {
             if (input.indexOf(input.charAt(i)) != input.lastIndexOf(input.charAt(i))) {
-                return false;
+                return true;
             }
+        }
+        return false;
+    }
+
+    private boolean isDigitString(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return false;
         }
         return true;
     }
