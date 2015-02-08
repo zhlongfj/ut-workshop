@@ -22,21 +22,26 @@ public class GameProcess {
     public void start() throws IOException {
         out.println("Welcome!");
         int roundCount = 6;
+        String tips = "";
         while (roundCount > 0) {
             out.println("Please input your number(" + roundCount + "): ");
             String answer = answerGenerator.generate();
             String input = read.readLine();
-            String tips = guessNumber.getTips(input, answer);
+            tips = guessNumber.getTips(input, answer);
 
-            out.println(tips);
-            if (!"4A0B".equals(tips)) {
-                roundCount--;
-            } else {
-                out.println("Congratulations!");
-                return ;
+            if ("4A0B".equals(tips)) {
+                break;
             }
+            out.println(tips);
+            roundCount--;
+        }
+
+        if ("4A0B".equals(tips)) {
+            out.println("Congratulations!");
+            return ;
         }
 
         out.println("Game Over");
+
     }
 }
