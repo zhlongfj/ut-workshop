@@ -89,4 +89,15 @@ public class GameProcessTest {
         inOrder.verify(out).println("0A4B");
         inOrder.verify(out).println("Game Over");
     }
+
+    @Test
+    public void should_print_congratulation_when_guess_right() throws IOException {
+        given(answerGenerator.generate()).willReturn("1234");
+
+        game.start();
+        InOrder inOrder = inOrder(out);
+        inOrder.verify(out).println("Welcome!");
+        inOrder.verify(out).println("Please input your number(6): ");
+        inOrder.verify(out).println("Congratulations!");
+    }
 }

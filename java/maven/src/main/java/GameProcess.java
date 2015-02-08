@@ -31,6 +31,9 @@ public class GameProcess {
             out.println(tips);
             if (!"4A0B".equals(tips)) {
                 roundCount--;
+            } else {
+                out.println("Congratulations!");
+                return ;
             }
         }
 
