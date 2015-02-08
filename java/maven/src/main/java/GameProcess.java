@@ -28,8 +28,15 @@ public class GameProcess {
             String answer = answerGenerator.generate();
             String input = read.readLine();
             if (!isDuplicated(input)) {
+                out.println("Cannot input duplicate numbers!");
                 continue;
             }
+
+            if (input.length() != 4) {
+                out.println("Must input 4 digits String!");
+                continue;
+            }
+
             tips = guessNumber.getTips(input, answer);
 
             if ("4A0B".equals(tips)) {
@@ -51,7 +58,6 @@ public class GameProcess {
     private boolean isDuplicated(String input) {
         for (int i = 0; i < input.length(); i++) {
             if (input.indexOf(input.charAt(i)) != input.lastIndexOf(input.charAt(i))) {
-                out.println("Cannot input duplicate numbers!");
                 return false;
             }
         }

@@ -142,4 +142,26 @@ public class GameProcessTest {
 
         inOrder.verify(out).println("Please input your number(5): ");
     }
+
+    @Test
+    public void should_print_must_input_4_digits_string() throws IOException {
+        given(read.readLine())
+                .willReturn("12345")
+                .willReturn("123")
+                .willReturn("1234");
+
+
+        game.start();
+        InOrder inOrder = inOrder(out);
+        inOrder.verify(out).println("Welcome!");
+        inOrder.verify(out).println("Please input your number(6): ");
+        inOrder.verify(out).println("Must input 4 digits String!");
+        inOrder.verify(out).println("Please input your number(6): ");
+        inOrder.verify(out).println("Must input 4 digits String!");
+        inOrder.verify(out).println("Please input your number(6): ");
+        inOrder.verify(out).println("0A4B");
+
+        inOrder.verify(out).println("Please input your number(5): ");
+
+    }
 }
