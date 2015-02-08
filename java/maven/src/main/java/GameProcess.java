@@ -10,6 +10,9 @@ public class GameProcess {
     private final BufferedReader read;
     private final AnswerGenerator answerGenerator;
     private final GuessNumber guessNumber;
+    private String answer;
+    private int roundCount;
+
 
     public GameProcess(PrintStream out, BufferedReader read, AnswerGenerator answerGenerator, GuessNumber guessNumber) {
 
@@ -20,39 +23,55 @@ public class GameProcess {
     }
 
     public void start() throws IOException {
+        initForStart();
+        printBegin();
+        printEnd(play());
+    }
+
+    private void initForStart() {
+        roundCount = 6;
+        answer = answerGenerator.generate();
+    }
+
+    private void printBegin() {
         out.println("Welcome!");
-        int roundCount = 6;
-        String answer = answerGenerator.generate();
+    }
+
+    private String play() throws IOException {
         String tips = "";
-        while (roundCount > 0) {
+        while (roundCount > 0 && !guessNumber.isTipsAllRight(tips)) {
             out.println("Please input your number(" + roundCount + "): ");
             String input = read.readLine();
-            if (input.length() != 4 || !isDigitString(input)) {
-                out.println("Must input 4 digits String!");
+            if (!isLegal(input)) {
                 continue;
             }
+            tips = playOnce(input);
+        }
+        return  tips;
+    }
 
-            if (isDuplicated(input)) {
-                out.println("Cannot input duplicate numbers!");
-                continue;
-            }
+    private String playOnce(String input) {
+        String tips = guessNumber.getTips(input, answer);
 
-            tips = guessNumber.getTips(input, answer);
-
-            if ("4A0B".equals(tips)) {
-                break;
-            }
+        if (!guessNumber.isTipsAllRight(tips)) {
             out.println(tips);
             roundCount--;
         }
+        return tips;
+    }
 
-        if ("4A0B".equals(tips)) {
-            out.println("Congratulations!");
-            return ;
+    private boolean isLegal(String input) {
+        if (input.length() != 4 || !isDigitString(input)) {
+            out.println("Must input 4 digits String!");
+            return false;
         }
 
-        out.println("Game Over");
+        if (isDuplicated(input)) {
+            out.println("Cannot input duplicate numbers!");
+            return false;
+        }
 
+        return true;
     }
 
     private boolean isDuplicated(String input) {
@@ -71,5 +90,13 @@ public class GameProcess {
             return false;
         }
         return true;
+    }
+
+    private void printEnd(String tips) {
+        if (guessNumber.isTipsAllRight(tips)) {
+            out.println("Congratulations!");
+        } else {
+            out.println("Game Over");
+        }
     }
 }
