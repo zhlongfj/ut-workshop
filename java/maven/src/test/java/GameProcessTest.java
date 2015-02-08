@@ -60,6 +60,17 @@ public class GameProcessTest {
     }
 
     @Test
+    public void should_print_please_input_the_same_chance_just_once() throws IOException {
+        game.start();
+        verify(out, atMost(1)).println("Please input your number(6): ");
+        verify(out, atMost(1)).println("Please input your number(5): ");
+        verify(out, atMost(1)).println("Please input your number(4): ");
+        verify(out, atMost(1)).println("Please input your number(3): ");
+        verify(out, atMost(1)).println("Please input your number(2): ");
+        verify(out, atMost(1)).println("Please input your number(1): ");
+    }
+
+    @Test
     public void should_reduce_chances_one_by_one_until_game_over() throws IOException {
         game.start();
         InOrder inOrder = inOrder(out);
