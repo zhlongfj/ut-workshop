@@ -27,6 +27,9 @@ public class GameProcess {
             out.println("Please input your number(" + roundCount + "): ");
             String answer = answerGenerator.generate();
             String input = read.readLine();
+            if (!isDuplicated(input)) {
+                continue;
+            }
             tips = guessNumber.getTips(input, answer);
 
             if ("4A0B".equals(tips)) {
@@ -43,5 +46,15 @@ public class GameProcess {
 
         out.println("Game Over");
 
+    }
+
+    private boolean isDuplicated(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            if (input.indexOf(input.charAt(i)) != input.lastIndexOf(input.charAt(i))) {
+                out.println("Cannot input duplicate numbers!");
+                return false;
+            }
+        }
+        return true;
     }
 }

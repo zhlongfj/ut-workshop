@@ -125,4 +125,21 @@ public class GameProcessTest {
         inOrder.verify(out, never()).println("4A0B");
         inOrder.verify(out).println("Congratulations!");
     }
+
+    @Test
+    public void should_print_cannot_input_duplicate_numbers_when_input_contain_duplicate_digit() throws IOException {
+        given(read.readLine())
+                .willReturn("1223")
+                .willReturn("1234");
+
+        game.start();
+        InOrder inOrder = inOrder(out);
+        inOrder.verify(out).println("Welcome!");
+        inOrder.verify(out).println("Please input your number(6): ");
+        inOrder.verify(out).println("Cannot input duplicate numbers!");
+        inOrder.verify(out).println("Please input your number(6): ");
+        inOrder.verify(out).println("0A4B");
+
+        inOrder.verify(out).println("Please input your number(5): ");
+    }
 }
