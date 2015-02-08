@@ -22,10 +22,10 @@ public class GameProcess {
     public void start() throws IOException {
         out.println("Welcome!");
         int roundCount = 6;
+        String answer = answerGenerator.generate();
         String tips = "";
         while (roundCount > 0) {
             out.println("Please input your number(" + roundCount + "): ");
-            String answer = answerGenerator.generate();
             String input = read.readLine();
             if (input.length() != 4 || !isDigitString(input)) {
                 out.println("Must input 4 digits String!");

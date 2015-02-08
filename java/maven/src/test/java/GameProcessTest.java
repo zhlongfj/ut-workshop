@@ -28,7 +28,9 @@ public class GameProcessTest {
         game = new GameProcess(out, read, answerGenerator, guessNumber);
 
         given(read.readLine()).willReturn("1234");
-        given(answerGenerator.generate()).willReturn("4321");
+        given(answerGenerator.generate())
+                .willReturn("4321")
+                .willReturn("1234");
     }
 
     @Test
