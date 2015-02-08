@@ -82,13 +82,7 @@ public class Guess {
     }
 
     private boolean isRight(String input) {
-        String result = guessNumber.getTips(input, answer);
-        if (result.equals("4A0B")) {
-            return true;
-        } else
-        {
-            return false;
-        }
+        return guessNumber.isTipsAllRight(guessNumber.getTips(input, answer)) ? true : false;
     }
 
     private boolean isGameOver(String input) {

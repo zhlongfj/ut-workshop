@@ -6,6 +6,10 @@ public class GuessNumber {
         return getCountsOfEqual(input, answer) + "A" + countsOfContainWithoutEqual(input, answer) + "B";
     }
 
+    public boolean isTipsAllRight(String tips) {
+        return tips.equals("4A0B") ? true : false;
+    }
+
     private int countsOfContainWithoutEqual(String input, String answer) {
         return getCountsOfContain(input, answer) - getCountsOfEqual(input, answer);
     }
